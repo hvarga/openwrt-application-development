@@ -1,0 +1,30 @@
+\input{package_list}
+\input{package_configuration}
+
+\title{OpenWrt}
+\subtitle{Application Development}
+\author{Hrvoje Varga}
+\date{}
+
+\usetheme{Luebeck}
+\setbeamercolor{background canvas}{bg=lightgray}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\useoutertheme{infolines}
+
+\AtBeginPart
+{
+    \begin{frame}[plain]
+        \partpage
+    \end{frame}
+}
+
+\AtBeginSection[]
+{
+    \begin{withoutheadline}
+        \begin{frame}
+            \frametitle{Outline}
+            \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,subsubsectionstyle=show/show/hide/hide]
+        \end{frame}
+    \end{withoutheadline}
+}
