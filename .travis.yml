@@ -1,0 +1,28 @@
+language: generic
+
+services:
+- docker
+
+before_install:
+- docker pull hvarga/latex-docker
+
+script:
+- docker run --rm -v ${PWD}:/home/latex/work -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --user root --entrypoint make hvarga/latex-docker
+
+before_deploy:
+- git tag "build-$TRAVIS_BUILD_NUMBER"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: mLUzVIQpVAMybaHzUkjt33CC1HAnOxqCDYDmaW/0XHmOWHgNqxDqmotTDNZIFijxo/kS1dtDEaTdcUp4d4TML7AKdnk7USXwXYQFYWKTqmWo0cjd4lRIj7f2HVfthkxuhdjN8uSz7tLO8R4kM1iJwMF08ph8FMnjvelCNOxwPWQyYLUTVCgTsEfV7ApTJyMpbLZVeF2R4WlX0sofin+ggYN6++BBsXWR15pRjWxDls7BVkoRodtHR5Kf/QqFbHFXQ1WUqsgqEsrkXLE1klxG/a1Rio3hzByMElglA1tZUoq7L26Hz2lJ29PzugW3pwErsuz4N9MSiCDov3xa/hTY35V5uAItleTutp3qQlI4r+NGM6ydkpiRjR+ulxhljlmEYrg65nZZYIdrVTirsS92Duhis0R2rTp0fYXC6bmRF4fb0qVy3Ms+vBPIhogZkJfuyscp4SAqB8OcWqy0CY7w+KSGD89Bf0uBKE4BvrXwJ/sIVPvNLhFETQs24B6QEbiLnUkVnTVBRpoH3/zuqGnKkm3sOKOUHn/G45C1SMWpRgvEPBUPUMUwuqudA6+Zri9X5cyvXu3/37yTxbytu/gHUBV3faIeiF6tA+lO2xNEjiZ5eAuXZefIUXfmJR0LQ6O0ZKWp0uuOIM///RCIMPPAKMGggJrJBRaGfCW0dFUy5xk=
+  file: presentation/build/openwrt-application-development.pdf
+  overwrite: true
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: false
+
+branches:
+  except:
+    - /build-[0-9]/

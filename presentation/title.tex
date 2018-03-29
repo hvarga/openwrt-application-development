@@ -1,0 +1,14 @@
+\begin{frame}[plain]
+    \IfFileExists{current_commit.tex} {
+        \input{current_commit.tex}
+        \addtobeamertemplate{title page}{} {
+            \begin{center}
+                \tiny \commitdate
+                \\
+                \tiny \commitid
+            \end{center}
+        }
+    }
+
+    \titlepage
+\end{frame}
