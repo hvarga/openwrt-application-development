@@ -1,0 +1,47 @@
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+
+\lstset{
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,
+    frame=shadowbox,
+    numberstyle=\small\ttfamily\color{black!60},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+    autogobble=true,
+    rulesepcolor=\color{blue}
+}
+
+\hypersetup {
+    bookmarksopen=true,
+    bookmarksopenlevel=4,
+    colorlinks,
+    linkcolor=.,
+    citecolor=blue
+}
+\setcounter{tocdepth}{4}
+
+\renewcommand{\texttt}[1]{\colorbox{lbcolor}{{\ttfamily #1}}}
+
+\addbibresource{main.bib}
+
+\WarningFilter{biblatex}{Patching footnotes failed}
+
+\graphicspath{ {resources/} }
+
+\makeatletter
+\newenvironment{withoutheadline}{
+    \setbeamertemplate{headline}[default]
+    \def\beamer@entrycode{\vspace*{-\headheight}}
+}{}
+\makeatother
+
+\setbeamertemplate{frametitle continuation}{}
