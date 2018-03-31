@@ -1,0 +1,39 @@
+\input{package_list}
+\input{package_configuration}
+
+\title{OpenWrt}
+\subtitle{Application Development}
+\author{Hrvoje Varga}
+\date{}
+
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\useoutertheme{infolines}
+
+\AtBeginPart
+{
+    \begin{frame}[plain]
+        \partpage
+    \end{frame}
+}
+
+\AtBeginSection[]
+{
+    \begin{withoutheadline}
+        \begin{frame}
+            \frametitle{Outline}
+            \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,subsubsectionstyle=show/show/hide/hide]
+        \end{frame}
+    \end{withoutheadline}
+}
+
+\makeatletter
+\newenvironment{withoutheadline}{
+    \setbeamertemplate{headline}[default]
+    \def\beamer@entrycode{\vspace*{-\headheight}}
+}{}
+\makeatother
+
+\newcommand{\fitframegraphics}[1] {
+    \centerline{\includegraphics[width=\textwidth, height=0.8\textheight, keepaspectratio]{#1}}
+}
