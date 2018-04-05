@@ -1,0 +1,83 @@
+\section{Modules Overview}
+
+\subsection{List of Core Modules}
+\begin{frame}{List of Core Modules}
+    \pause
+    \begin{description}[<+-|alert@+>]
+        \item[ubox] General purpose library which provides features like an event loop, binary blob message formatting and handling, linked list, and some JSON helpers~\cite{openwrt-ubox}~\cite{openwrt-libubox}~\cite{lutfi-ubox_ubus}~\cite{openwrt-log}.
+        \item[uci] Configuration interface aimed to centralize the configuration of OpenWrt~\cite{openwrt-uci}~\cite{openwrt-libuci}.
+        \item[ubus] Sofware communication bus which provides communication between various daemons and applications in OpenWrt~\cite{openwrt-ubus}~\cite{lutfi-ubus}~\cite{lutfi-ubox_ubus}~\cite{openwrt-rpc_guide}~\cite{openwrt-rpc_techref}.
+        \item[procd] Process manager~\cite{openwrt-procd}.
+        \item[opkg] Package manager~\cite{openwrt-opkg}.
+    \end{description}
+\end{frame}
+
+\subsection{Logical Structure}
+\begin{frame}{Logical Structure}
+    \fitframegraphics{openwrt-modules}
+\end{frame}
+
+\section{ubox}
+
+\subsection{Overview}
+\begin{frame}{Overview}
+    \begin{itemize}[<+-|alert@+>]
+        \item Collection of C utility functions for OpenWrt.
+        \item Composed of two components: \href{https://git.openwrt.org/project/libubox.git}{libubox} and \href{https://git.openwrt.org/project/ubox.git}{ubox}.
+        \item General purpose library (think \href{https://wiki.gnome.org/Projects/GLib}{glib} and \href{https://www.boost.org/}{boost} only micro size) and utilities.
+        \item Provides polling, event handling, socket helper functions, logging, MD5 hashing, generating/parsing tagged binary data, AVL binary-tree balancing, JSON handling, task queueing/completion tracking, endian conversion, Base64 encoding/decoding, linked lists and key value lists.
+        \item Provides centralized logging systems with logd (think Syslog) and logread.
+    \end{itemize}
+\end{frame}
+
+\subsection{uloop}
+
+\subsubsection{Problem Domain}
+\begin{frame}{Problem Domain}
+    \fitframegraphics{event-loop}
+\end{frame}
+
+\subsubsection{Features}
+\begin{frame}{Features}
+    \begin{itemize}[<+-|alert@+>]
+        \item I/O event notification loop.
+        \item Its job is to poll file descriptors, run timers, manage child processes.
+        \item Event loop is backed by epoll and kqueue~\cite{starch-linux-programming-interface}.
+    \end{itemize}
+\end{frame}
+
+\subsubsection{Code Snippet}
+\begin{frame}[fragile, allowframebreaks]{Code Snippet}
+    \lstinputlisting[language=C]{uloop-hello-world.c}
+\end{frame}
+
+\section{uci}
+
+\subsection{Overview}
+\begin{frame}{Overview}
+    \begin{itemize}[<+-|alert@+>]
+        \item Common configuration format used by every application running on OpenWrt.
+        \item Centralize the whole configuration of a device running OpenWrt.
+        \item Configuration file is exposed with the \inlinecode{uci} utility and \inlinecode{libuci} C library.
+        \item New application should use the uci system.
+        \item Existing non-uci compatible application can be made compatible by writing wrapper.
+        \item Eases application development since developer doesn't need to bother with creating his own configuration syntax and parser.
+        \item Since every other application shares the common configuration format, less time is spent to accomodate to a yet another configuration syntax.
+    \end{itemize}
+\end{frame}
+
+\subsection{Features}
+\begin{frame}{Features}
+    \begin{itemize}[<+-|alert@+>]
+        \item OpenWrt central configuration is split into files located in the \inlinecode{/etc/config/} directory.
+        \item Each configuration file relates roughly to the part of the system it configures or the application.
+        \item Configuration file can be modified using text editor or \inlinecode{uci} command line tool. Custom C application that uses \inlinecode{libuci} can be used for modification.
+        \item \inlinecode{uci} tool exposes CRUD operations on configuration file.
+        \item \inlinecode{uci} tool CRUD operation are staged into a temporary location and written permanently to flash with a commit command.
+    \end{itemize}
+\end{frame}
+
+\subsection{Configuration File Syntax}
+\begin{frame}{Configuration File Syntax}
+    TODO
+\end{frame}
